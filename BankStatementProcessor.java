@@ -50,5 +50,16 @@ public class BankStatementProcessor {
         }
         return total;
     }
-}
 
+    public double maximumExpenseInMonth(final Month month) {
+        double max = 0;
+        for(final BankTransaction bankTransaction:bankTransactions) {
+            if(bankTransaction.getDate().getMonth() == month) {
+                if(bankTransaction.getAmount() < max){  //< because expenses are in negative
+                    max = bankTransaction.getAmount();
+                }
+            }
+        }
+        return max;
+    }
+}

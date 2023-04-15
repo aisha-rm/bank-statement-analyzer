@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BankStatementAnalyzer {
 
-    private static final String RESOURCES = "";  //eg "src/main/resources/", empty now for current directory
+    private static final String RESOURCES = "";  //eg "src/main/resources/", empty                                               now for current directory
 
     public void analyze(final String fileName, final BankStatementParser bankStatementParser)
         throws IOException {
@@ -33,6 +33,8 @@ public class BankStatementAnalyzer {
             bankStatementProcessor.calculateTotalInMonth(Month.APRIL));
         System.out.println("The total salary received is " +
             bankStatementProcessor.calculateTotalForCategory("Salary"));
+        System.out.println("The maximum expense transaction for April is " + 
+            bankStatementProcessor.maximumExpenseInMonth(Month.APRIL));
     }        
     
 }
