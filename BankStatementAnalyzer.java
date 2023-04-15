@@ -3,29 +3,27 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 
-public class BankTransactionAnalyzerSimple {
+public class BankStatementAnalyzer {
 
-    private static final String RESOURCES = "statement.csv";
-    private static final BankStatementCSVParser bankStatementParser = new BankStatementCSVParser();
+    private static final String RESOURCES = "";  //eg "src/main/resources/", empty now for current directory
 
-    public static void main(String[] args) throws IOException {
-                
-        //final String fileName = args[0];
-        final Path path = Paths.get(RESOURCES); // + fileName);
+    public void analyze(final String fileName, final BankStatementParser bankStatementParser)
+        throws IOException {
+        
+        final Path path = Paths.get(RESOURCES + fileName);  //statement.csv
         final List<String> lines = Files.readAllLines(path);
 
         final List<BankTransaction> bankTransactions 
-            = bankStatementParser.parseLinesFromCSV(lines);
-
+            = bankStatementParser.parseLinesFrom(lines);
+        
         final BankStatementProcessor bankStatementProcessor 
-            = new BankStatementProcessor(bankTransactions);
+        = new BankStatementProcessor(bankTransactions);
 
-            collectSummary(bankStatementProcessor);
+        collectSummary(bankStatementProcessor);
     }
-    
+     
     private static void collectSummary(final BankStatementProcessor bankStatementProcessor) {
         System.out.println("The total for all transactions is "
             + bankStatementProcessor.calculateTotalAmount());
